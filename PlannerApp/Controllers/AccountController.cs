@@ -17,7 +17,7 @@ using PlannerApp.Services;
 namespace PlannerApp.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
+    //[Route("[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -247,7 +247,7 @@ namespace PlannerApp.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(AccountController.Login), "Account");
         }
 
         [HttpPost]
@@ -335,7 +335,7 @@ namespace PlannerApp.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(HomeController.HelloWorld), "Home");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -455,7 +455,7 @@ namespace PlannerApp.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(HomeController.HelloWorld), "Home");
             }
         }
 

@@ -1,0 +1,12 @@
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\bin\Debug\netcoreapp2.0\PlannerApp.deps.json
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\bin\Debug\netcoreapp2.0\PlannerApp.runtimeconfig.json
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\bin\Debug\netcoreapp2.0\PlannerApp.runtimeconfig.dev.json
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\bin\Debug\netcoreapp2.0\PlannerApp.dll
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\bin\Debug\netcoreapp2.0\PlannerApp.pdb
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.csproj.CoreCompileInputs.cache
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.AssemblyInfoInputs.cache
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.AssemblyInfo.cs
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.dll
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.pdb
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.csprojResolveAssemblyReference.cache

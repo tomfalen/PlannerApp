@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-PlannerApp-3C9E4E79-F852-4013-B908-11C799323EEE</UserSecretsId>
+    <UserSecretsId>aspnet-PlannerApp-A642CE10-7DDE-4DBE-B6EA-C8D3F11EE344</UserSecretsId>
   </PropertyGroup>
 
 
