@@ -1,0 +1,22 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h4>@ViewData["Title"]</h4>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            @Html.DisplayNameFor(model => model.Username)
+            @Html.DisplayFor(model => model.Username)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayFor(model => model.Email)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </div>
+    </div>
+</div>
