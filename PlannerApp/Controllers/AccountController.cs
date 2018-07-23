@@ -455,7 +455,7 @@ namespace PlannerApp.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.HelloWorld), "Home");
+                return RedirectToAction(nameof(MenuController.Index), "Menu");
             }
         }
 

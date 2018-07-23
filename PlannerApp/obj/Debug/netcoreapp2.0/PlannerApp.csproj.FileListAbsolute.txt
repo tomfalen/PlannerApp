@@ -9,4 +9,4 @@ C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\Planne
 C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.AssemblyInfo.cs
 C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.dll
 C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.pdb
-C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.csprojResolveAssemblyReference.cache
+C:\Users\Tommy\source\repos\PlannerApp\PlannerApp\obj\Debug\netcoreapp2.0\PlannerApp.csprojAssemblyReference.cache
