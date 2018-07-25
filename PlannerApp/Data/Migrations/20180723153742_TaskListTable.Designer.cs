@@ -12,9 +12,10 @@ using System;
 namespace PlannerApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180723153742_TaskListTable")]
+    partial class TaskListTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,11 +190,9 @@ namespace PlannerApp.Data.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("DueDate");
+                    b.Property<int>("MyProperty");
 
-                    b.Property<int>("Priority");
-
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("ID");
 

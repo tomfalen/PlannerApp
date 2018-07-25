@@ -1,0 +1,43 @@
+﻿@model List<TaskListModel>
+
+@{
+    ViewData["Title"] = "Task list";
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="container">
+    @Html.ActionLink("Add new", "AddNew")
+    <h2>Group List With Your Tasks</h2>
+    <div class="list-group">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.ActionLink("Desctiption", "Index", new { sortOrder = "Description", currentSort = ViewBag.CurrentSort })
+                </th>
+                <th>
+                    @Html.ActionLink("CreatedDate", "Index", new { sortOrder = "CreatedDate", currentSort = ViewBag.CurrentSort })
+                </th>
+                <th>
+                    @Html.ActionLink("DueDate", "Index", new { sortOrder = "DueDate", currentSort = ViewBag.CurrentSort })
+                </th>
+                <th>
+                    @Html.ActionLink("Priority", "Index", new { sortOrder = "Priority", currentSort = ViewBag.CurrentSort })
+                </th>
+                <th></th>
+            </tr>
+        </table>
+            @foreach (var item in Model)
+            {
+                <a href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">Description</h4>
+                    <p class="list-group-item-text">@item.Description</p>
+                    <h4 class="list-group-item-heading">Deadline</h4>
+                    <p class="list-group-item-text">@item.DueDate</p>
+                    <h4 class="list-group-item-heading">Priority</h4>
+                    <p class="list-group-item-text">@item.Priority</p>
+                </a>
+                @Html.ActionLink("Delete", "DeleteTask", new { id = item.ID })
+            }
+    </div>
+</div>
