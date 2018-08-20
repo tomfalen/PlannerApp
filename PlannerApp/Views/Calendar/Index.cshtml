@@ -1,0 +1,72 @@
+﻿@using PlannerApp.ViewModels
+@model CalendarViewModel
+
+@{
+    ViewData["Title"] = "Calendar";
+    DateTime date = ViewBag.Date;
+}
+<h4>@ViewData["Title"]</h4>
+<h6>@date</h6>
+@{
+    var months = System.Globalization.DateTimeFormatInfo
+                    .InvariantInfo
+                    .MonthNames
+                    .TakeWhile(monthName => monthName != String.Empty)
+                    .Select((monthName, index) => new SelectListItem
+                    {
+                        Value = (index + 1).ToString(System.Globalization.CultureInfo.InvariantCulture),
+                        Text = string.Format("{0}", monthName)
+                    });
+
+    var years = DateTime.Today.Year.ToString();
+}
+
+
+<form asp-controller="Calendar" asp-action="Index" method="post">
+    @Html.DropDownList("Month", months)
+    @Html.TextBox("Year", years)
+    <input type="submit">
+</form>
+
+
+
+<div class="col-md-4">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"> Mn </div>
+        <div class="col-md-4"> Tu </div>
+    </div>
+</div>
+<div class="col-md-8">
+    <div class="row">
+        <div class="col-md-2"> We </div>
+        <div class="col-md-2"> Thur </div>
+        <div class="col-md-2"> Fri </div>
+        <div class="col-md-2"> Sat </div>
+        <div class="col-md-2"> Sun </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+@{ 
+    @*int days, weeks = 6;
+    while (weeks != 1)
+    {
+        <div class="col-md-4">
+            <div class="row">
+        @{
+        
+        }
+                </div></div>
+        days = 6;
+        for(int i = 0; i < days; i++)
+        {
+            if(i < 2)
+            {
+                if(i == 0) { 
+
+                }
+            }
+
+        }
+    }*@
+}

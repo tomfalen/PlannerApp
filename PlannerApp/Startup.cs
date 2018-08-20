@@ -33,6 +33,7 @@ namespace PlannerApp
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddScoped<ITaskListSorter, TaskListSorter>();
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 

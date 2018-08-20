@@ -9,6 +9,6 @@ namespace PlannerApp.Enums
     {
         Low,
         Medium,
-        High,
+        High
     }
 }

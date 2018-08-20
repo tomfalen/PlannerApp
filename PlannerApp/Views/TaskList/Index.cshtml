@@ -1,4 +1,4 @@
-﻿@model List<TaskListModel>
+﻿@model PlannerApp.ViewModels.TaskListViewModel
 
 @{
     ViewData["Title"] = "Task list";
@@ -13,21 +13,29 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.ActionLink("Desctiption", "Index", new { sortOrder = "Description", currentSort = ViewBag.CurrentSort })
+                    <p>Description</p>
+                    @Html.ActionLink("^", "Index", new { sortBy = PlannerApp.Enums.SortBy.Description, sortOrder = PlannerApp.Enums.SortOrder.Ascending })
+                    @Html.ActionLink("v", "Index", new { sortBy = PlannerApp.Enums.SortBy.Description, sortOrder = PlannerApp.Enums.SortOrder.Descending })
                 </th>
                 <th>
-                    @Html.ActionLink("CreatedDate", "Index", new { sortOrder = "CreatedDate", currentSort = ViewBag.CurrentSort })
+                    <p>Created date</p>
+                    @Html.ActionLink("^", "Index", new { sortBy = PlannerApp.Enums.SortBy.CreatedDate, sortOrder = PlannerApp.Enums.SortOrder.Ascending })
+                    @Html.ActionLink("v", "Index", new { sortBy = PlannerApp.Enums.SortBy.CreatedDate, sortOrder = PlannerApp.Enums.SortOrder.Descending })
                 </th>
                 <th>
-                    @Html.ActionLink("DueDate", "Index", new { sortOrder = "DueDate", currentSort = ViewBag.CurrentSort })
+                    <p>Due date</p>
+                    @Html.ActionLink("^", "Index", new { sortBy = PlannerApp.Enums.SortBy.DueDate, sortOrder = PlannerApp.Enums.SortOrder.Ascending })
+                    @Html.ActionLink("v", "Index", new { sortBy = PlannerApp.Enums.SortBy.DueDate, sortOrder = PlannerApp.Enums.SortOrder.Descending })
                 </th>
                 <th>
-                    @Html.ActionLink("Priority", "Index", new { sortOrder = "Priority", currentSort = ViewBag.CurrentSort })
+                    <p>Priority</p>
+                    @Html.ActionLink("^", "Index", new { sortBy = PlannerApp.Enums.SortBy.Priority, sortOrder = PlannerApp.Enums.SortOrder.Ascending })
+                    @Html.ActionLink("v", "Index", new { sortBy = PlannerApp.Enums.SortBy.Priority, sortOrder = PlannerApp.Enums.SortOrder.Descending })
                 </th>
                 <th></th>
             </tr>
         </table>
-            @foreach (var item in Model)
+            @foreach (var item in Model.TaskList)
             {
                 <a href="#" class="list-group-item">
                     <h4 class="list-group-item-heading">Description</h4>

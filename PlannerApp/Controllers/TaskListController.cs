@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlannerApp.Data;
+using PlannerApp.Enums;
 using PlannerApp.Models;
+using PlannerApp.Services;
+using PlannerApp.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,71 +19,34 @@ namespace PlannerApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ITaskListSorter _taskListSorter;
 
-        public TaskListController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public TaskListController(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            ITaskListSorter taskListSorter
+        )
         {
             _context = context;
             _userManager = userManager;
+            _taskListSorter = taskListSorter;
         }
-                    //if (sortOrder.Equals(CurrentSort))  
-                    //    employees = db.Employees.OrderByDescending
-                    //            (m => m.Name).ToPagedList(pageIndex, pageSize);  
-                    //else  
-                    //    employees = db.Employees.OrderBy
-                    //            (m => m.Name).ToPagedList(pageIndex, pageSize);  
-                    //break;  
-        public IActionResult Index(string sortOrder, string currentSort)
+
+        public IActionResult Index(SortBy sortBy, SortOrder sortOrder)
         {
             var taskList = from t in _context.TaskList
+                           where t.UserId == _userManager.GetUserId(User)
                            select t;
             if (taskList.Any())
             {
-                ViewBag.CurrentSort = sortOrder;
-                sortOrder = String.IsNullOrEmpty(sortOrder) ? "Description" : sortOrder;
-                switch (sortOrder)
+                TaskListViewModel taskListView = new TaskListViewModel()
                 {
-                    case "Description":
-                        if (sortOrder.Equals(currentSort))
-                        {
-                            taskList = taskList.OrderByDescending(s => s.Description);
-                        }
-                        else
-                        {
-                            taskList = taskList.OrderBy(s => s.Description);
-                        }
-                        break;
-                    case "CreatedDate":
-                        if (sortOrder.Equals(currentSort))
-                        {
-                            taskList = taskList.OrderByDescending(s => s.CreatedDate);
-                        }
-                        else
-                        {
-                            taskList = taskList.OrderBy(s => s.CreatedDate);
-                        }
-                        break;
-                    case "DueDate":
-                        if (sortOrder.Equals(currentSort))
-                        {
-                            taskList = taskList.OrderByDescending(s => s.DueDate);
-                        }
-                        else
-                        {
-                            taskList = taskList.OrderBy(s => s.DueDate);
-                        }
-                        break;
-                    case "Priority":
-                        if (sortOrder.Equals(currentSort))
-                        {
-                            taskList = taskList.OrderByDescending(s => s.Priority);
-                        }
-                        else
-                        {
-                            taskList = taskList.OrderBy(s => s.Priority);
-                        }
-                        break;
-                }
-                return View(taskList.ToList());
+                    TaskList = taskList.ToList(),
+                    SortBy = sortBy,
+                    SortOrder = sortOrder
+                };
+                taskListView = _taskListSorter.Sort(taskListView);
+                return View(taskListView);
             }
             else
             {
