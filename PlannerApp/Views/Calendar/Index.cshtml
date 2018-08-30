@@ -1,35 +1,31 @@
-﻿@using PlannerApp.ViewModels
-@model CalendarViewModel
+﻿@model PlannerApp.ViewModels.CalendarViewModel
 
 @{
     ViewData["Title"] = "Calendar";
-    DateTime date = ViewBag.Date;
 }
 <h4>@ViewData["Title"]</h4>
-<h6>@date</h6>
-@{
-    var months = System.Globalization.DateTimeFormatInfo
-                    .InvariantInfo
-                    .MonthNames
-                    .TakeWhile(monthName => monthName != String.Empty)
-                    .Select((monthName, index) => new SelectListItem
-                    {
-                        Value = (index + 1).ToString(System.Globalization.CultureInfo.InvariantCulture),
-                        Text = string.Format("{0}", monthName)
-                    });
-
-    var years = DateTime.Today.Year.ToString();
-}
 
 
-<form asp-controller="Calendar" asp-action="Index" method="post">
-    @Html.DropDownList("Month", months)
-    @Html.TextBox("Year", years)
-    <input type="submit">
-</form>
-
-
-
+<div class="row">
+    <div class="col-md-4">
+        <form action="Index" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AllMonths"></label>
+                @Html.DropDownListFor(
+                                x => x.SelectedMonthId,
+                                new SelectList(Model.AllMonths, "Value", "Text"))
+                <span asp-validation-for="AllMonths" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentYear"></label>
+                <input asp-for="CurrentYear" class="form-control" />
+                <span asp-validation-for="CurrentYear" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">submit</button>
+        </form>
+    </div>
+</div>
 <div class="col-md-4">
     <div class="row">
         <div class="col-md-4"></div>
@@ -47,26 +43,98 @@
         <div class="col-md-2"></div>
     </div>
 </div>
-@{ 
-    @*int days, weeks = 6;
-    while (weeks != 1)
+
+@{
+    int weeks = 0, lastDay = 0;
+    while (weeks != 5)
     {
         <div class="col-md-4">
             <div class="row">
-        @{
-        
-        }
-                </div></div>
-        days = 6;
-        for(int i = 0; i < days; i++)
-        {
-            if(i < 2)
-            {
-                if(i == 0) { 
-
-                }
-            }
-
-        }
-    }*@
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @Model.DaysNTasksList[lastDay].Day
+                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                    {
+                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
+                        {
+                            <p>@task.Description</p>
+                        }
+                    }
+                    @{lastDay++;}
+                </div>
+                <div class="col-md-4">
+                    @Model.DaysNTasksList[lastDay].Day
+                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                    {
+                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
+                        {
+                            <p>@task.Description</p>
+                        }
+                    }
+                    @{lastDay++;}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-2">
+                    @Model.DaysNTasksList[lastDay].Day
+                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                    {
+                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
+                        {
+                            <p>@task.Description</p>
+                        }
+                    }
+                    @{lastDay++;}
+                </div>
+                <div class="col-md-2">
+                    @Model.DaysNTasksList[lastDay].Day
+                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                    {
+                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
+                        {
+                            <p>@task.Description</p>
+                        }
+                    }
+                    @{lastDay++;}
+                </div>
+                <div class="col-md-2">
+                    @Model.DaysNTasksList[lastDay].Day
+                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                    {
+                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
+                        {
+                            <p>@task.Description</p>
+                        }
+                    }
+                    @{lastDay++;}
+                </div>
+                <div class="col-md-2">
+                    @Model.DaysNTasksList[lastDay].Day
+                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                    {
+                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
+                        {
+                            <p>@task.Description</p>
+                        }
+                    }
+                    @{lastDay++;}
+                </div>
+                <div class="col-md-2">
+                    @Model.DaysNTasksList[lastDay].Day
+                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                    {
+                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
+                        {
+                            <p>@task.Description</p>
+                        }
+                    }
+                    @{lastDay++;}
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        weeks++;
+    }
 }

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using PlannerApp.Models;
 using PlannerApp.Data;
 using PlannerApp.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
+using PlannerApp.Services;
 
 namespace PlannerApp.Controllers
 {
@@ -14,29 +17,37 @@ namespace PlannerApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICalendarDaySorter _calendarDaySorter;
 
-        public CalendarController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public CalendarController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ICalendarDaySorter calendarDaySorter)
         {
             _context = context;
             _userManager = userManager;
+            _calendarDaySorter = calendarDaySorter;
+            
         }
         public IActionResult Index()
         {
-            ViewBag.Date = DateTime.Now;
-            return View();
+            int year = DateTime.Now.Year, month = DateTime.Now.Month;
+            CalendarViewModel calendarView = new CalendarViewModel()
+            {
+                CurrentYear = year,
+                DayOfWeek = new DateTime(year, month, 1).DayOfWeek,
+                Tasks = _context.TaskList.Where(x => x.UserId == _userManager.GetUserId(User)).ToList(),
+                DaysNTasksList = new List<DayViewModel>()
+            };
+            _calendarDaySorter.Sort(calendarView);
+            return View(calendarView);
         }
         [HttpPost]
-        public IActionResult Index(int month, int year)
+        public IActionResult Index(CalendarViewModel calendarView)
         {
-            ViewBag.Date = new DateTime(year, month, 1);
-            ViewBag.DayOfWeek = ViewBag.Date.DayOfWeek;
-            ViewBag.Days = DateTime.DaysInMonth(ViewBag.Date.Year, ViewBag.Date.Month);
-            ViewBag.PreviousMonthDays = DateTime.DaysInMonth(ViewBag.Date.Year, ViewBag.Date.Month - 1);
-            var viewModel = new CalendarViewModel
-            {
-                
-            };
-            return View();
+            int selectedMonthId = int.Parse(calendarView.SelectedMonthId);
+            calendarView.DayOfWeek = new DateTime(calendarView.CurrentYear, selectedMonthId, 1).DayOfWeek;
+            calendarView.Tasks = _context.TaskList.Where(x => x.UserId == _userManager.GetUserId(User)).ToList();
+            calendarView.DaysNTasksList = new List<DayViewModel>();
+            _calendarDaySorter.Sort(calendarView);
+            return View(calendarView);
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using PlannerApp.Models;
-using PlannerApp.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using PlannerApp.ViewModels;
 using System.Linq;
 using PlannerApp.Enums;
-using System.Threading.Tasks;
 
 namespace PlannerApp.Services
 {
