@@ -1,69 +1,233 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html {
+    height: 100%;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
+body {
+    height: 100%;
+    color: #3377ff;
+    font-family: 'Lato', sans-serif;
+    background-color: #e9ebee;
+}
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    height: 100%;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
 #qrCode {
     margin: 15px;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
-}
-
-.sidenav {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-.sidenav a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-}
-.sidenav button {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-        background-color: transparent;
-        border: none;
-}
 .sidenav a:hover {
     color: #f1f1f1;
 }
+
+.calendarPickedDate{
+    display: inline-block;
+}
+
+.calendarDay:hover {
+    box-shadow: 1px 4px 85px 4px #3377ff;
+    z-index: 2;
+}
+.calendarDay:active {
+    background-color: #3377ff;
+    color: white;
+}
+.calendar {
+    height: 90.333333%;
+    padding: 0px;
+}
+.calendarGrid {
+    height: 95%;
+    width: 100%;
+    border: 1px solid #6699ff;
+}
+.dateSelector {
+    height: 9.66666667%;
+    font-size: 20px;
+}
+.dateSelector p {
+    display: inline-block;
+}
+
+.calendarDay .list-group li {
+    color: white;
+    background-color: #6699ff;
+    padding: 0px 10px;
+    border-radius: 0px;
+    font-size: 15px
+}
+
+.calendarBadge {
+    background-color: #007bff;
+    float: right;
+}
+
+.calendarDay {
+    padding: 5px;
+    background-color: white;
+    border: 1px solid #6699ff;
+    color: #3377ff;
+    width: 14%;
+    height: 100%;
+}
+.calendarDayName {
+    width: 14%;
+    padding: 0px;
+    z-index: 2;
+}
+.calendarWeek {
+    height: 20%;
+    margin: 0px;
+}
+.calendarkWeekDays {
+    height: 5%;
+    font-size: 20px;
+    margin: 0px;
+}
+/*.container-fluid {
+    border: 1px solid #3396ff;
+}*/
+.taskListContainer{
+    display: table;
+    border-collapse: collapse;
+}
+
+.taskListDelete {
+    position: absolute;
+    right: 12px;
+    top: 15px
+}
+.taskList {
+    display: table-row;
+    border: 1px solid #6699ff;
+    border-radius: 5px;
+    border-collapse: collapse;
+}
+
+.taskContent{
+    padding: 10px 5px;
+}
+
+.dayBody{
+    height: 300px;
+    overflow: auto;
+}
+
+.card-header p{
+    font-weight: 400;
+    font-size: 15px;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+}
+
+@media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
+    .sidenav {
+        height: 10%;
+        width: 100%;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 1px;
+        background-image: linear-gradient(to bottom right,#3377ff, white);
+        max-width: unset;
+        /*background-image: linear-gradient(#0f1e3e, #98b2e6)*/
+    }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .sidenav button {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: inline-block;
+            transition: 0.3s;
+            background-color: transparent;
+            border: none;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+    .body-content {
+        width: 100%;
+        max-width: unset;
+    }
+}
+
+@media (min-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+
+@media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+}
+
+@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
+    .sidenav {
+        height: 100%;
+        width: 16.66666667%;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+        background-image: linear-gradient(to bottom right,#3377ff, white)
+        /*background-image: linear-gradient(#0f1e3e, #98b2e6)*/
+    }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav button {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            background-color: transparent;
+            border: none;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+    .body-content {
+        width: 83.33333333%;
+    }
+}
+
+@media (min-width:1442px) { /* big landscape tablets, laptops, and desktops */
+
+}
+
+/*@media (min-width:1281px) { /* hi-res laptops and desktops */
+    /*.calendarDay {
+        width: 150px;
+        height: 150px;
+    }*/

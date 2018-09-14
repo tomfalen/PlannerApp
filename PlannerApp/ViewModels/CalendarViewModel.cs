@@ -10,7 +10,8 @@ namespace PlannerApp.ViewModels
     public class CalendarViewModel
     {
         public string Title { get; set; }
-        public string SelectedMonthId { get; set; }
+        public DateTime PickedDate { get; set; }
+        public int SelectedMonthDay { get; set; }
         public int PreviousMonthDays
         {
             get
@@ -21,21 +22,21 @@ namespace PlannerApp.ViewModels
         public DayOfWeek DayOfWeek { get; set; }
         public List<TaskListModel> Tasks { get; set; }
         public List<DayViewModel> DaysNTasksList { get; set; }
-        public List<SelectListItem> AllMonths
-        {
-            get
-            {
-                return System.Globalization.DateTimeFormatInfo
-                                .InvariantInfo
-                                .MonthNames
-                                .TakeWhile(monthName => monthName != String.Empty)
-                                .Select((monthName, index) => new SelectListItem
-                                {
-                                    Value = (index + 1).ToString(DateTimeFormatInfo.InvariantInfo),
-                                    Text = string.Format("{0}", monthName)
-                                }).ToList();
-            }
-        }
+        //public List<SelectListItem> AllMonths
+        //{
+        //    get
+        //    {
+        //        return System.Globalization.DateTimeFormatInfo
+        //                        .InvariantInfo
+        //                        .MonthNames
+        //                        .TakeWhile(monthName => monthName != String.Empty)
+        //                        .Select((monthName, index) => new SelectListItem
+        //                        {
+        //                            Value = (index + 1).ToString(DateTimeFormatInfo.InvariantInfo),
+        //                            Text = string.Format("{0}", monthName)
+        //                        }).ToList();
+        //    }
+        //}
         public int PreviousMonth
         {
             get
@@ -47,7 +48,7 @@ namespace PlannerApp.ViewModels
         {
             get
             {
-                return SelectedMonthId != null ? int.Parse(SelectedMonthId) : 1;
+                return PickedDate.Month;
             }
         }
         public int FurtherMonth
@@ -72,11 +73,5 @@ namespace PlannerApp.ViewModels
                 return CurrentMonth == 12 ? CurrentYear + 1 : CurrentYear;
             }
         }
-    }
-
-    public class DayViewModel
-    {
-        public int Day { get; set; }
-        public List<TaskListModel> TaskList { get; set; }
     }
 }

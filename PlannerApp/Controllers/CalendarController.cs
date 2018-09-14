@@ -28,26 +28,53 @@ namespace PlannerApp.Controllers
         }
         public IActionResult Index()
         {
-            int year = DateTime.Now.Year, month = DateTime.Now.Month;
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
             CalendarViewModel calendarView = new CalendarViewModel()
             {
                 CurrentYear = year,
                 DayOfWeek = new DateTime(year, month, 1).DayOfWeek,
                 Tasks = _context.TaskList.Where(x => x.UserId == _userManager.GetUserId(User)).ToList(),
-                DaysNTasksList = new List<DayViewModel>()
+                DaysNTasksList = new List<DayViewModel>(),
+                PickedDate = new DateTime(year, month, 1)
             };
             _calendarDaySorter.Sort(calendarView);
+            ViewData["Title"] = "Calendar";
             return View(calendarView);
         }
-        [HttpPost]
-        public IActionResult Index(CalendarViewModel calendarView)
+
+        [HttpGet]
+        public IActionResult ChangeDate(int month, int year)
         {
-            int selectedMonthId = int.Parse(calendarView.SelectedMonthId);
-            calendarView.DayOfWeek = new DateTime(calendarView.CurrentYear, selectedMonthId, 1).DayOfWeek;
-            calendarView.Tasks = _context.TaskList.Where(x => x.UserId == _userManager.GetUserId(User)).ToList();
-            calendarView.DaysNTasksList = new List<DayViewModel>();
+            CalendarViewModel calendarView = new CalendarViewModel()
+            {
+                CurrentYear = year,
+                DayOfWeek = new DateTime(year, month, 1).DayOfWeek,
+                Tasks = _context.TaskList.Where(x => x.UserId == _userManager.GetUserId(User)).ToList(),
+                DaysNTasksList = new List<DayViewModel>(),
+                PickedDate = new DateTime(year, month, 1),
+            };
             _calendarDaySorter.Sort(calendarView);
-            return View(calendarView);
+            ViewData["Title"] = "Calendar";
+            return View("Index", calendarView);
         }
+
+        public IActionResult GetCalendarDay(int year, int month, int day)
+        {
+            DateTime pickedDate = new DateTime(year, month, day);
+            var taskList = _context.TaskList.Where(x => x.DueDate.Date == pickedDate.Date && x.UserId == _userManager.GetUserId(User)).ToList();
+            return PartialView("CalendarDay", taskList);
+        }
+
+        //[HttpPost]
+        //public IActionResult Index(CalendarViewModel calendarView)
+        //{
+        //    int selectedMonthId = int.Parse(calendarView.SelectedMonthId);
+        //    calendarView.DayOfWeek = new DateTime(calendarView.CurrentYear, selectedMonthId, 1).DayOfWeek;
+        //    calendarView.Tasks = _context.TaskList.Where(x => x.UserId == _userManager.GetUserId(User)).ToList();
+        //    calendarView.DaysNTasksList = new List<DayViewModel>();
+        //    _calendarDaySorter.Sort(calendarView);
+        //    return View(calendarView);
+        //}
     }
 }

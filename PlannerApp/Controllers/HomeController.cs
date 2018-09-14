@@ -10,7 +10,7 @@ namespace PlannerApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult HelloWorld()
+        public IActionResult Index()
         {
             return View();
         }

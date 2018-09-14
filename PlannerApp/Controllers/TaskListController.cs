@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlannerApp.Data;
 using PlannerApp.Enums;
@@ -69,6 +70,15 @@ namespace PlannerApp.Controllers
         [HttpGet]
         public IActionResult AddNew()
         {
+            var priorityList = from Priority p in Enum.GetValues(typeof(Priority))
+                               select new
+                               {
+                                   ID = (int)p,
+                                   Name = p.ToString()
+                               };
+            ViewBag.EnumList = new SelectList(priorityList, "ID", "Name");
+            ViewData["Title"] = "Add new task";
+            ViewData["Header"] = "Create new task";
             return View();
         }
 
@@ -85,6 +95,44 @@ namespace PlannerApp.Controllers
             }
             else
             {
+                ViewData["Title"] = "Add new task";
+                ViewData["Header"] = "Create new task";
+                return View(task);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            TaskListModel task = _context.TaskList.Find(id);
+            var priorityList = from Priority p in Enum.GetValues(typeof(Priority))
+                               select new
+                               {
+                                   ID = (int)p,
+                                   Name = p.ToString()
+                               };
+            ViewBag.EnumList = new SelectList(priorityList, "ID", "Name");
+            ViewData["Title"] = "Edit";
+            ViewData["Header"] = "Edit task";
+            return View("../TaskList/AddNew", task);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(TaskListModel task)
+        {
+            var t = @ViewData["ReturnUrl"];
+            if (ModelState.IsValid)
+            {
+                task.UserId = _userManager.GetUserId(User);
+                task.CreatedDate = DateTime.Now;
+                _context.Update(task);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewData["Title"] = "Add new task";
+                ViewData["Header"] = "Create new task";
                 return View(task);
             }
         }

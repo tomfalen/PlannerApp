@@ -335,7 +335,7 @@ namespace PlannerApp.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.HelloWorld), "Home");
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -455,7 +455,7 @@ namespace PlannerApp.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(MenuController.Index), "Menu");
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
 

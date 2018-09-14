@@ -3,138 +3,84 @@
 @{
     ViewData["Title"] = "Calendar";
 }
-<h4>@ViewData["Title"]</h4>
 
 
-<div class="row">
-    <div class="col-md-4">
-        <form action="Index" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AllMonths"></label>
-                @Html.DropDownListFor(
-                                x => x.SelectedMonthId,
-                                new SelectList(Model.AllMonths, "Value", "Text"))
-                <span asp-validation-for="AllMonths" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrentYear"></label>
-                <input asp-for="CurrentYear" class="form-control" />
-                <span asp-validation-for="CurrentYear" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-default">submit</button>
-        </form>
+
+<div class="row dateSelector">
+    <div class="col-md-12"><label>@ViewData["Title"]</label></div>
+    <div class="col-md-12 calendarPickedDate">
+        <p>Picked date:</p>
+        @Html.ActionLink("<", "ChangeDate", new { month = Model.PickedDate.AddMonths(-1).Month, year = Model.PickedDate.Year }, new { @class = "dupa" })
+        <p>@Model.PickedDate.Month</p>
+        @Html.ActionLink(">", "ChangeDate", new { month = Model.PickedDate.AddMonths(1).Month, year = Model.PickedDate.Year })
+        /
+        @Html.ActionLink("<", "ChangeDate", new { month = Model.PickedDate.Month, year = Model.PickedDate.AddYears(-1).Year })
+        <p>@Model.PickedDate.Year</p>
+        @Html.ActionLink(">", "ChangeDate", new { month = Model.PickedDate.Month, year = Model.PickedDate.AddYears(1).Year })
     </div>
 </div>
-<div class="col-md-4">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"> Mn </div>
-        <div class="col-md-4"> Tu </div>
+<div class="container-fluid calendar">
+    <div class="row calendarkWeekDays">
+        <div class="col calendarDayName"> Mn </div>
+        <div class="col calendarDayName"> Tu </div>
+        <div class="col calendarDayName"> We </div>
+        <div class="col calendarDayName"> Thur </div>
+        <div class="col calendarDayName"> Fri </div>
+        <div class="col calendarDayName"> Sat </div>
+        <div class="col calendarDayName"> Sun </div>
     </div>
-</div>
-<div class="col-md-8">
-    <div class="row">
-        <div class="col-md-2"> We </div>
-        <div class="col-md-2"> Thur </div>
-        <div class="col-md-2"> Fri </div>
-        <div class="col-md-2"> Sat </div>
-        <div class="col-md-2"> Sun </div>
-        <div class="col-md-2"></div>
+    <div class="calendarGrid">
+
+        @{
+            int lastDay = 0;
+            for (int weeks = 0; weeks < 5; weeks++)
+            {
+                <div class="row calendarWeek">
+
+                    @for (int days = 0; days < 7; days++)
+                    {
+                        <div class="col calendarDay" onclick="editProduct(@Model.PickedDate.Year, @Model.PickedDate.Month, @Model.DaysNTasksList[lastDay].Day)">
+                            <span>@Model.DaysNTasksList[lastDay].Day</span>
+                            <span class="badge badge-primary badge-pill calendarBadge">@Model.DaysNTasksList[lastDay].TaskList.Count()</span>
+                            @if (Model.DaysNTasksList[lastDay].TaskList.Any())
+                            {
+                            <ul class="list-group list-group-flush">
+                                @for (int i = 0; i < @Model.DaysNTasksList[lastDay].TaskList.Count; i++)
+                                {
+                                    if (i != 3)
+                                    {
+                                        <li class="list-group-item" onclick="">@Model.DaysNTasksList[lastDay].TaskList[i].Description</li>
+                                    }
+                                }
+                                <p>Więcej...</p>
+                            </ul>
+                            }
+                            @{lastDay++;}
+                        </div>
+                    }
+                </div>
+            }
+        }
     </div>
+
 </div>
 
-@{
-    int weeks = 0, lastDay = 0;
-    while (weeks != 5)
-    {
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    @Model.DaysNTasksList[lastDay].Day
-                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
-                    {
-                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
-                        {
-                            <p>@task.Description</p>
-                        }
-                    }
-                    @{lastDay++;}
-                </div>
-                <div class="col-md-4">
-                    @Model.DaysNTasksList[lastDay].Day
-                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
-                    {
-                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
-                        {
-                            <p>@task.Description</p>
-                        }
-                    }
-                    @{lastDay++;}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-2">
-                    @Model.DaysNTasksList[lastDay].Day
-                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
-                    {
-                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
-                        {
-                            <p>@task.Description</p>
-                        }
-                    }
-                    @{lastDay++;}
-                </div>
-                <div class="col-md-2">
-                    @Model.DaysNTasksList[lastDay].Day
-                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
-                    {
-                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
-                        {
-                            <p>@task.Description</p>
-                        }
-                    }
-                    @{lastDay++;}
-                </div>
-                <div class="col-md-2">
-                    @Model.DaysNTasksList[lastDay].Day
-                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
-                    {
-                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
-                        {
-                            <p>@task.Description</p>
-                        }
-                    }
-                    @{lastDay++;}
-                </div>
-                <div class="col-md-2">
-                    @Model.DaysNTasksList[lastDay].Day
-                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
-                    {
-                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
-                        {
-                            <p>@task.Description</p>
-                        }
-                    }
-                    @{lastDay++;}
-                </div>
-                <div class="col-md-2">
-                    @Model.DaysNTasksList[lastDay].Day
-                    @if (Model.DaysNTasksList[lastDay].TaskList.Any())
-                    {
-                        @foreach (var task in (Model.DaysNTasksList[lastDay].TaskList))
-                        {
-                            <p>@task.Description</p>
-                        }
-                    }
-                    @{lastDay++;}
-                </div>
-                <div class="col-md-2"></div>
-            </div>
-        </div>
-        weeks++;
+<div id="modalWrapper">
+</div>
+<script>
+    function editProduct(year, month, day) {
+        $.ajax({
+            url: '/Calendar/GetCalendarDay',
+            data: {
+                year: year,
+                month: month,
+                day: day
+            },
+            success: function (data) {
+                $('#modalWrapper').html(data);
+                $('#dayModal').modal();
+            }
+
+        });
     }
-}
+</script>
