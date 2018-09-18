@@ -10,7 +10,7 @@
     <div class="col-md-12"><label>@ViewData["Title"]</label></div>
     <div class="col-md-12 calendarPickedDate">
         <p>Picked date:</p>
-        @Html.ActionLink("<", "ChangeDate", new { month = Model.PickedDate.AddMonths(-1).Month, year = Model.PickedDate.Year }, new { @class = "dupa" })
+        @Html.ActionLink("<", "ChangeDate", new { month = Model.PickedDate.AddMonths(-1).Month, year = Model.PickedDate.Year })
         <p>@Model.PickedDate.Month</p>
         @Html.ActionLink(">", "ChangeDate", new { month = Model.PickedDate.AddMonths(1).Month, year = Model.PickedDate.Year })
         /

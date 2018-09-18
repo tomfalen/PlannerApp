@@ -22,21 +22,6 @@ namespace PlannerApp.ViewModels
         public DayOfWeek DayOfWeek { get; set; }
         public List<TaskListModel> Tasks { get; set; }
         public List<DayViewModel> DaysNTasksList { get; set; }
-        //public List<SelectListItem> AllMonths
-        //{
-        //    get
-        //    {
-        //        return System.Globalization.DateTimeFormatInfo
-        //                        .InvariantInfo
-        //                        .MonthNames
-        //                        .TakeWhile(monthName => monthName != String.Empty)
-        //                        .Select((monthName, index) => new SelectListItem
-        //                        {
-        //                            Value = (index + 1).ToString(DateTimeFormatInfo.InvariantInfo),
-        //                            Text = string.Format("{0}", monthName)
-        //                        }).ToList();
-        //    }
-        //}
         public int PreviousMonth
         {
             get

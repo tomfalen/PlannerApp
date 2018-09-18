@@ -9,7 +9,6 @@ namespace PlannerApp.Services
     {
         public CalendarViewModel Sort(CalendarViewModel calendarView)
         {
-            //int currentMonth = calendarView.SelectedMonthId != null ? int.Parse(calendarView.SelectedMonthId) : 1;
             int weeks = 0;
             int firstDay = (int)calendarView.DayOfWeek;
             int lastDay = 0;

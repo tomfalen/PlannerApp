@@ -65,16 +65,5 @@ namespace PlannerApp.Controllers
             var taskList = _context.TaskList.Where(x => x.DueDate.Date == pickedDate.Date && x.UserId == _userManager.GetUserId(User)).ToList();
             return PartialView("CalendarDay", taskList);
         }
-
-        //[HttpPost]
-        //public IActionResult Index(CalendarViewModel calendarView)
-        //{
-        //    int selectedMonthId = int.Parse(calendarView.SelectedMonthId);
-        //    calendarView.DayOfWeek = new DateTime(calendarView.CurrentYear, selectedMonthId, 1).DayOfWeek;
-        //    calendarView.Tasks = _context.TaskList.Where(x => x.UserId == _userManager.GetUserId(User)).ToList();
-        //    calendarView.DaysNTasksList = new List<DayViewModel>();
-        //    _calendarDaySorter.Sort(calendarView);
-        //    return View(calendarView);
-        //}
     }
 }

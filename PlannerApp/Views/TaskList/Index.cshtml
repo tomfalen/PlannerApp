@@ -7,8 +7,9 @@
 
 <h4>@ViewData["Title"]</h4>
 @Html.ActionLink("Add new", "AddNew")
+
 <div class="container-fluid taskListContainer">
-    <div class="row sortingLinks">
+    <div class="sortingLinks">
         <div class="col-md-3">
             @Html.ActionLink("", "Index", new { sortBy = PlannerApp.Enums.SortBy.Description, sortOrder = PlannerApp.Enums.SortOrder.Ascending }, new { @class = "fas fa-angle-up fa-2x" })
             <p>Description</p>
@@ -30,28 +31,23 @@
             @Html.ActionLink("", "Index", new { sortBy = PlannerApp.Enums.SortBy.Priority, sortOrder = PlannerApp.Enums.SortOrder.Descending }, new { @class = "fas fa-angle-down fa-2x" })
         </div>
     </div>
-    <div></div>
-    
-    @foreach (var item in Model.TaskList)
-    {
-        <div class="row taskList">
-            <div class="col-md-3 taskContent">
+    <div class="taskList">
+
+        @foreach (var item in Model.TaskList)
+        {
+            <div class="col-md-3 taskContentDescription">
                 <h4 class="">@item.Description</h4>
             </div>
-            <div class="col-md-3 taskContent">
+            <div class="col-md-3 taskContentCreatedDate">
                 <h4 class="">@item.CreatedDate</h4>
             </div>
-            <div class="col-md-3 taskContent">
+            <div class="col-md-3 taskContentDueDate">
                 <h4 class="">@item.DueDate</h4>
             </div>
-            <div class="col-md-3 taskContent">
+            <div class="col-md-3 taskContentPriority">
                 <h4 class="">@item.Priority</h4>
                 @Html.ActionLink("", "DeleteTask", new { id = item.ID }, new { @class = "taskListDelete list-group-item-text fas fa-trash-alt fa-2x" })
             </div>
-            @*<i class="taskListDelete " onclick='location.href ='<%: Url.Action("Delete", "TaskList", "@item.ID")%>' '></i>*@
-            @*<input class="" type="button" onclick="location.href='<%:Url.Action("Delete","TaskList", new { id = @item.ID  })%>'" />*@
-        </div>
-
-    }
-
+        }
+    </div>
 </div>

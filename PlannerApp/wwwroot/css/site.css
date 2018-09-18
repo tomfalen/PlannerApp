@@ -18,7 +18,22 @@ body {
 #qrCode {
     margin: 15px;
 }
+.profileInfo {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
 
+.profileInfo td,
+.profileInfo th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.profileInfo tr:nth-child(even) {
+    background-color: #dddddd;
+}
 .sidenav a:hover {
     color: #f1f1f1;
 }
@@ -36,7 +51,7 @@ body {
     color: white;
 }
 .calendar {
-    height: 90.333333%;
+    height: 89.333333%;
     padding: 0px;
 }
 .calendarGrid {
@@ -87,12 +102,8 @@ body {
     font-size: 20px;
     margin: 0px;
 }
-/*.container-fluid {
-    border: 1px solid #3396ff;
-}*/
 .taskListContainer{
-    display: table;
-    border-collapse: collapse;
+    height: 90%;
 }
 
 .taskListDelete {
@@ -100,18 +111,30 @@ body {
     right: 12px;
     top: 15px
 }
-.taskList {
-    display: table-row;
-    border: 1px solid #6699ff;
-    border-radius: 5px;
-    border-collapse: collapse;
+.taskList{
+    height: 85%;
+    overflow-y: auto;
+    width: 100%;
+    background-color: white;
 }
-
+.taskList div {
+    text-align: center;
+}
+.sortingLinks {
+    text-align: center;
+    height: 15%;
+    background-color: white;
+}
 .taskContent{
     padding: 10px 5px;
 }
 
-.dayBody{
+.taskContentDescription,
+.taskContentCreatedDate,
+.taskContentDueDate {
+    border-right: 1px solid;
+}
+.dayBody {
     height: 300px;
     overflow: auto;
 }
@@ -137,7 +160,6 @@ body {
         padding-top: 1px;
         background-image: linear-gradient(to bottom right,#3377ff, white);
         max-width: unset;
-        /*background-image: linear-gradient(#0f1e3e, #98b2e6)*/
     }
 
         .sidenav a {
@@ -191,7 +213,6 @@ body {
         transition: 0.5s;
         padding-top: 60px;
         background-image: linear-gradient(to bottom right,#3377ff, white)
-        /*background-image: linear-gradient(#0f1e3e, #98b2e6)*/
     }
 
         .sidenav a {
@@ -226,8 +247,3 @@ body {
 
 }
 
-/*@media (min-width:1281px) { /* hi-res laptops and desktops */
-    /*.calendarDay {
-        width: 150px;
-        height: 150px;
-    }*/
